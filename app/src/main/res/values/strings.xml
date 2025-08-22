@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">DCharcha</string>
+    <string name="choose_language">Choose your language</string>
+    <string name="continue_lbl">Continue</string>
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
+    <string name="done">Done</string>
+    <string name="sign_in">Sign in</string>
+    <string name="mobile_number">Mobile number</string>
+    <string name="get_otp">Get OTP</string>
+    <string name="verify">Verify</string>
+    <string name="profile_setup">Profile setup</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="email">Email</string>
+    <string name="address">Address</string>
+    <string name="save_continue">Save &amp; Continue</string>
+</resources>

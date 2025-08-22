@@ -1,0 +1,86 @@
+# Gradle
+.gradle/
+build/
+**/build/
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+*.ipr
+*.iws
+.idea/caches
+.idea/libraries
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/gradle.xml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Kotlin / Java
+*.class
+*.log
+*.hprof
+
+# Keystore files
+*.jks
+*.keystore
+*.pem
+*.p12
+*.key
+*.crt
+
+# Local properties
+local.properties
+*.local.properties
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+fastlane/readme.md
+
+# Firebase
+google-services.json
+GoogleService-Info.plist
+
+# Android Profiling
+*.hprof
+
+# Logs
+*.log
+/logs
+*.stacktrace
+
+# NDK / CMake
+obj/
+.cxx/
+
+# Other caches
+captures/
+.externalNativeBuild
+.idea/misc.xml
+*.apk
+*.ap_
+
+# Jetpack Compose preview cache
+*.compose-cache
+
+# Lint / Sonar / Tools
+lint/intermediates/
+lint/generated/
+lint/outputs/
+lint/tmp/
+sonar/report-task.txt
+
+# Kotlin Multiplatform (if used later)
+iosApp/Pods/
+iosApp/build/
+xcuserdata/
+DerivedData/

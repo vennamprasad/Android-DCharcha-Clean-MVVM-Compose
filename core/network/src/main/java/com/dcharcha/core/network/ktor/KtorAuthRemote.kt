@@ -1,5 +1,6 @@
 package com.dcharcha.core.network.ktor
 
+import com.dcharcha.core.network.dto.TokenDto
 import com.dcharcha.domain.repository.AuthRemote
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -7,9 +8,6 @@ import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import kotlinx.serialization.Serializable
 import javax.inject.Inject
-
-@Serializable
-data class TokenDto(val token: String)
 
 class KtorAuthRemote @Inject constructor(private val client: HttpClient) : AuthRemote {
     override suspend fun requestOtp(phone: String) = runCatching {

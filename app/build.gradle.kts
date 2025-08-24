@@ -45,6 +45,7 @@ dependencies {
 
     implementation(libs.splashscreen)
     implementation(libs.lottie.compose)
+    implementation(libs.paging.compose)
 
     implementation(project(":core:navigation"))
     implementation(project(":core:ui"))
@@ -55,6 +56,7 @@ dependencies {
     implementation(project(":core:database"))
     implementation(project(":core:network"))
     implementation(project(":domain"))
+    implementation(project(":data"))
     implementation(project(":feature:splash"))
     implementation(project(":feature:language"))
     implementation(project(":feature:onboarding"))

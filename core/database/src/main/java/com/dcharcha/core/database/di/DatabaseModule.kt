@@ -3,7 +3,8 @@ package com.dcharcha.core.database.di
 import android.content.Context
 import androidx.room.Room
 import com.dcharcha.core.database.AppDatabase
-import com.dcharcha.core.database.UserProfileDao
+import com.dcharcha.core.database.dao.RemoteKeyDao
+import com.dcharcha.core.database.dao.UserProfileDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,8 +18,14 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun db(@ApplicationContext context: Context): AppDatabase =
-        Room.databaseBuilder(context, AppDatabase::class.java, "app.db").build()
+        Room.databaseBuilder(context, AppDatabase::class.java, "DCharcha.db").build()
 
     @Provides
     fun profileDao(db: AppDatabase): UserProfileDao = db.userProfileDao()
+
+    @Provides
+    fun itemDao(db: AppDatabase) = db.itemDao()
+
+    @Provides
+    fun remoteKeyDao(db: AppDatabase): RemoteKeyDao = db.remoteKeyDao()
 }

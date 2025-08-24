@@ -21,8 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dcharcha.core.database.UserProfile
-import com.dcharcha.core.database.UserProfileDao
+import com.dcharcha.core.database.entity.UserProfile
+import com.dcharcha.core.database.dao.UserProfileDao
 import com.dcharcha.core.ui.DynamicBackdrop
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

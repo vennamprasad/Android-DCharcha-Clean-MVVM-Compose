@@ -28,6 +28,7 @@ include(
     ":core:datastore",
     ":core:database",
     ":core:network",
+    ":data",
     ":domain",
     ":feature:splash",
     ":feature:language",

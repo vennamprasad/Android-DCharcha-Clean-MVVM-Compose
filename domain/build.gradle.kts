@@ -21,7 +21,8 @@ android {
 dependencies {
     api(libs.coroutines.core)
     api(libs.coroutines.android)
-    implementation(libs.hilt.android)
+    api(libs.paging.runtime)
+    api(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
     ksp(libs.hilt.compiler.ext)
 }

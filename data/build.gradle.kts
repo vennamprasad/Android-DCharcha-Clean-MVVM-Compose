@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.dcharcha.core.database"
+    namespace = "com.dcharcha.data"
     compileSdk = 36
     defaultConfig { minSdk = 24 }
     compileOptions {
@@ -19,14 +19,14 @@ android {
 }
 
 dependencies {
-    api(libs.room.runtime)
-    api(libs.room.ktx)
-    api(libs.room.paging)
-    ksp(libs.room.compiler)
-    api(libs.coroutines.core)
-    api(libs.coroutines.android)
-    api(libs.paging.runtime)
+    implementation(project(":core:network"))
+    implementation(project(":core:database"))
+    implementation(project(":domain"))
+
     api(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
     ksp(libs.hilt.compiler.ext)
+
+    api(libs.coroutines.core)
+    api(libs.okhttp)
 }

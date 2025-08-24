@@ -65,7 +65,8 @@ fun DynamicBackdrop(
             val context = LocalContext.current
             var bmp by remember { mutableStateOf<android.graphics.Bitmap?>(null) }
             LaunchedEffect(Unit) {
-                bmp = withContext(Dispatchers.IO) {
+                bmp =
+                    withContext(Dispatchers.IO) @androidx.annotation.RequiresPermission(anyOf = ["android.permission.READ_WALLPAPER_INTERNAL", android.Manifest.permission.MANAGE_EXTERNAL_STORAGE]) {
                     WallpaperManager.getInstance(context).drawable?.toBitmap(1080, 1920)
                 }
             }

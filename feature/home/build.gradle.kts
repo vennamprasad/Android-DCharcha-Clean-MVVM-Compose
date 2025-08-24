@@ -28,9 +28,13 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.navigation.compose)
     implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
+    implementation(libs.paging.compose)
+    implementation(libs.paging.compose.android)
     ksp(libs.hilt.android.compiler)
     ksp(libs.hilt.compiler.ext)
 
     implementation(project(":core:navigation"))
     implementation(project(":core:ui"))
+    implementation(project(":domain"))
 }

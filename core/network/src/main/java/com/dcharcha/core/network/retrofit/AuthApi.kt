@@ -1,9 +1,8 @@
 package com.dcharcha.core.network.retrofit
 
+import com.dcharcha.core.network.dto.TokenDto
 import retrofit2.http.Body
 import retrofit2.http.POST
-
-data class TokenDto(val token: String)
 
 interface AuthApi {
     @POST("auth/request-otp")

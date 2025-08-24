@@ -2,6 +2,7 @@ package com.dcharcha.core.network.di
 
 import com.dcharcha.core.network.ktor.KtorAuthRemote
 import com.dcharcha.core.network.retrofit.AuthApi
+import com.dcharcha.core.network.retrofit.ItemApi
 import com.dcharcha.core.network.retrofit.RetrofitAuthRemote
 import com.dcharcha.domain.repository.AuthRemote
 import dagger.Module
@@ -32,7 +33,7 @@ object AuthRemoteModule {
     @Provides
     @Singleton
     fun retrofit(ok: OkHttpClient): Retrofit = Retrofit.Builder()
-        .baseUrl("https://api.example.com/") // TODO set base URL
+        .baseUrl("https://jsonplaceholder.typicode.com/")
         .client(ok)
         .addConverterFactory(MoshiConverterFactory.create())
         .build()
@@ -40,6 +41,10 @@ object AuthRemoteModule {
     @Provides
     @Singleton
     fun api(r: Retrofit): AuthApi = r.create(AuthApi::class.java)
+
+    @Provides
+    @Singleton
+    fun itemApi(retrofit: Retrofit): ItemApi = retrofit.create(ItemApi::class.java)
 
     @Provides
     @Singleton

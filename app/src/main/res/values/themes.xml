@@ -3,7 +3,7 @@
     <style name="Theme.DCharcha" parent="Theme.Material3.DayNight.NoActionBar" />
 
     <style name="Theme.DCharcha.Splash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@android:color/black</item>
+        <item name="windowSplashScreenBackground">?attr/colorPrimary</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/baseline_android_24</item>
         <item name="postSplashScreenTheme">@style/Theme.DCharcha</item>
     </style>

@@ -1,10 +1,12 @@
 package com.dcharcha.feature.home.nav
 
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.dcharcha.core.navigation.FeatureNavGraph
 import com.dcharcha.feature.home.HomeRoute
+import com.dcharcha.feature.home.HomeViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,7 +21,14 @@ private object Routes {
 private class HomeGraph : FeatureNavGraph {
     override val route: String = Routes.Home
     override fun NavGraphBuilder.build(navController: NavHostController) {
-        composable(Routes.Home) { HomeRoute() }
+        composable(Routes.Home) {
+            val homeViewModel: HomeViewModel = hiltViewModel<HomeViewModel>()
+            HomeRoute(
+                vm = homeViewModel
+            ) { item ->
+
+            }
+        }
     }
 }
 

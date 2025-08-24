@@ -12,6 +12,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Qualifier
 import javax.inject.Singleton
@@ -32,11 +33,15 @@ object AuthRemoteModule {
 
     @Provides
     @Singleton
-    fun retrofit(ok: OkHttpClient): Retrofit = Retrofit.Builder()
-        .baseUrl("https://jsonplaceholder.typicode.com/")
-        .client(ok)
-        .addConverterFactory(MoshiConverterFactory.create())
-        .build()
+    fun retrofit(client: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("https://jsonplaceholder.typicode.com/")
+            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+    }
+
 
     @Provides
     @Singleton

@@ -9,6 +9,7 @@ import com.dcharcha.domain.usecase.GetPagedItemsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.debounce
@@ -25,7 +26,7 @@ class HomeViewModel @Inject constructor(
     private val _query = MutableStateFlow("")
     val query: StateFlow<String> = _query
 
-    val pagingFlow: kotlinx.coroutines.flow.Flow<PagingData<Item>> =
+    val pagingFlow: Flow<PagingData<Item>> =
         _query.debounce(300)
             .flatMapLatest { q -> getPagedItems(q) }
             .cachedIn(viewModelScope)

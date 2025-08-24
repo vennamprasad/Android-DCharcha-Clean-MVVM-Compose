@@ -49,8 +49,8 @@ class ItemRemoteMediator(
                 }
             }
 
-            val network =
-                api.getItems(page, state.config.pageSize.takeIf { it > 0 } ?: pageSize)
+            val requested = state.config.pageSize.takeIf { it > 0 } ?: pageSize
+            val network = api.getItems(page, requested)
 
             db.withTransaction {
                 if (loadType == LoadType.REFRESH) {

@@ -13,7 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 
 @Composable
-fun Modifier.shimmerish(): Modifier {
+fun Modifier.shimmer(): Modifier {
     val alpha by rememberInfiniteTransition(label = "shimmer")
         .animateFloat(
             initialValue = 0.3f,

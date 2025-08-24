@@ -10,4 +10,7 @@ interface ItemApi {
         @Query("_page") page: Int,
         @Query("_limit") pageSize: Int
     ): List<ItemDto>
+
+    @GET("posts")
+    suspend fun getItem(@Query("id") id: Int): ItemDto
 }

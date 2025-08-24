@@ -9,18 +9,17 @@ import androidx.compose.material3.ListItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.dcharcha.core.ui.components.shimmerish
+import com.dcharcha.core.ui.components.shimmer
 
 @Composable
 fun ItemPlaceholderCard() {
-    // Simple placeholder without external libs
     ListItem(
         headlineContent = {
             Box(
                 Modifier
                     .height(18.dp)
                     .fillMaxWidth(0.5f)
-                    .shimmerish()
+                    .shimmer()
             )
         },
         supportingContent = {
@@ -28,7 +27,7 @@ fun ItemPlaceholderCard() {
                 Modifier
                     .height(14.dp)
                     .fillMaxWidth(0.8f)
-                    .shimmerish()
+                    .shimmer()
             )
         }
     )

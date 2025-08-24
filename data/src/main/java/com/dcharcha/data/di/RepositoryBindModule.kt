@@ -1,10 +1,10 @@
 package com.dcharcha.data.di
 
-import com.dcharcha.core.database.AppDatabase
-import com.dcharcha.core.network.retrofit.ItemApi
+
 import com.dcharcha.data.repository.ItemRepositoryImpl
 import com.dcharcha.domain.repository.ItemRepository
 import com.dcharcha.domain.usecase.GetPagedItemsUseCase
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,13 +13,10 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RepositoryProvideModule {
-    @Provides
+abstract class RepositoryModule {
+    @Binds
     @Singleton
-    fun provideItemRepository(
-        db: AppDatabase,
-        api: ItemApi
-    ): ItemRepository = ItemRepositoryImpl(db, api)
+    abstract fun bindItemRepository(impl: ItemRepositoryImpl): ItemRepository
 }
 
 

@@ -1,10 +1,11 @@
 package com.dcharcha.core.network.di
 
-import com.dcharcha.core.network.ktor.KtorAuthRemote
 import com.dcharcha.core.network.retrofit.AuthApi
 import com.dcharcha.core.network.retrofit.ItemApi
-import com.dcharcha.core.network.retrofit.RetrofitAuthRemote
-import com.dcharcha.domain.repository.AuthRemote
+import com.dcharcha.domain.repository.AuthRepository
+import com.dcharcha.domain.repository.ItemRepository
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,7 +13,6 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Qualifier
 import javax.inject.Singleton
@@ -24,11 +24,16 @@ annotation class UseKtor
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AuthRemoteModule {
+object NetworkModule {
     @Provides
     @Singleton
     fun okHttp(): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+        .build()
+
+    @Provides @Singleton
+    fun moshi(): Moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
         .build()
 
     @Provides
@@ -36,8 +41,7 @@ object AuthRemoteModule {
     fun retrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://jsonplaceholder.typicode.com/")
-            .addConverterFactory(MoshiConverterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(moshi()))
             .client(client)
             .build()
     }
@@ -45,24 +49,9 @@ object AuthRemoteModule {
 
     @Provides
     @Singleton
-    fun api(r: Retrofit): AuthApi = r.create(AuthApi::class.java)
+    fun api(retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)
 
     @Provides
     @Singleton
     fun itemApi(retrofit: Retrofit): ItemApi = retrofit.create(ItemApi::class.java)
-
-    @Provides
-    @Singleton
-    @UseRetrofit
-    fun retrofitRemote(api: AuthApi): AuthRemote = RetrofitAuthRemote(api)
-
-    @Provides
-    @Singleton
-    @UseKtor
-    fun ktorRemote(ktor: KtorAuthRemote): AuthRemote = ktor
-
-    // Switch active implementation here
-    @Provides
-    @Singleton
-    fun active(@UseRetrofit impl: AuthRemote): AuthRemote = impl
 }

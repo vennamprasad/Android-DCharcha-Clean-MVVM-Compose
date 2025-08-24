@@ -1,6 +1,7 @@
 package com.dcharcha.core.ui
 
 import android.app.WallpaperManager
+import android.graphics.Bitmap
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -63,7 +64,7 @@ fun DynamicBackdrop(
 
         BackdropMode.BlurredWallpaper -> {
             val context = LocalContext.current
-            var bmp by remember { mutableStateOf<android.graphics.Bitmap?>(null) }
+            var bmp by remember { mutableStateOf<Bitmap?>(null) }
             LaunchedEffect(Unit) {
                 bmp =
                     withContext(Dispatchers.IO) @androidx.annotation.RequiresPermission(anyOf = ["android.permission.READ_WALLPAPER_INTERNAL", android.Manifest.permission.MANAGE_EXTERNAL_STORAGE]) {

@@ -2,8 +2,6 @@ package com.dcharcha.core.network.di
 
 import com.dcharcha.core.network.retrofit.AuthApi
 import com.dcharcha.core.network.retrofit.ItemApi
-import com.dcharcha.domain.repository.AuthRepository
-import com.dcharcha.domain.repository.ItemRepository
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -14,13 +12,8 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import javax.inject.Qualifier
 import javax.inject.Singleton
 
-@Qualifier
-annotation class UseRetrofit
-@Qualifier
-annotation class UseKtor
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -49,7 +42,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun api(retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)
+    fun authApi(retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)
 
     @Provides
     @Singleton

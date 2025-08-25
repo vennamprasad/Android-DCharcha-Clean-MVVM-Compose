@@ -1,10 +1,7 @@
 <resources>
 
-    <style name="Theme.DCharcha" parent="Theme.Material3.DayNight.NoActionBar" />
-
-    <style name="Theme.DCharcha.Splash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">?attr/colorPrimary</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/baseline_android_24</item>
-        <item name="postSplashScreenTheme">@style/Theme.DCharcha</item>
+    <style name="Theme.DCharcha" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@color/charchaPrimary</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>

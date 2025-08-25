@@ -16,25 +16,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.dcharcha.core.ui.DynamicBackdrop
 
 @Composable
 fun ForgotRoute(onDone: () -> Unit) {
     var email by remember { mutableStateOf("") }
-    DynamicBackdrop {
-        Column(
-            Modifier
-                .fillMaxSize()
-                .padding(16.dp)
-        ) {
-            OutlinedTextField(
-                email,
-                { email = it },
-                label = { Text("Email") },
-                modifier = Modifier.fillMaxWidth()
-            )
-            Spacer(Modifier.height(12.dp))
-            Button(onClick = onDone) { Text("Send reset link") }
-        }
+    Column(
+        Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        OutlinedTextField(
+            email,
+            { email = it },
+            label = { Text("Email") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(Modifier.height(12.dp))
+        Button(onClick = onDone) { Text("Send reset link") }
     }
 }

@@ -23,6 +23,9 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.drawable.toBitmap
+import com.dcharcha.core.ui.theme.BrandPrimary
+import com.dcharcha.core.ui.theme.BrandSecondary
+import com.dcharcha.core.ui.theme.BrandTertiary
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -35,65 +38,98 @@ fun DynamicBackdrop(
     content: @Composable () -> Unit
 ) {
     when (mode) {
+
+        // Uses MaterialTheme colors so it adapts to your light/dark schemes (and dynamic color if enabled)
         BackdropMode.DynamicColor -> {
             val scheme = MaterialTheme.colorScheme
+            val isDark = isSystemInDarkTheme()
             Box(
                 modifier
                     .fillMaxSize()
                     .background(
                         Brush.verticalGradient(
-                            0f to scheme.primary.copy(alpha = 0.22f),
-                            0.5f to scheme.secondary.copy(alpha = 0.18f),
-                            1f to if (isSystemInDarkTheme()) Color.Black else Color.White
+                            colors = listOf(
+                                scheme.primary.copy(alpha = 0.22f),
+                                scheme.secondary.copy(alpha = 0.18f),
+                                scheme.surface.copy(alpha = if (isDark) 0.6f else 1f)
+                            )
                         )
                     )
             ) { content() }
         }
 
+        // Brand gradient using your teal palette (hero/CTA feel)
         BackdropMode.BrandGradient -> {
             Box(
                 modifier
                     .fillMaxSize()
                     .background(
                         Brush.linearGradient(
-                            listOf(Color(0xFF5B8CFF), Color(0xFF8AE8FF), Color(0xFFA0FFCF))
+                            colors = listOf(
+                                BrandPrimary.copy(alpha = 0.95f),
+                                BrandSecondary.copy(alpha = 0.60f),
+                                BrandTertiary.copy(alpha = 0.50f)
+                            )
                         )
                     )
             ) { content() }
         }
 
+        // Blurred current wallpaper behind content with a subtle vignette overlay
         BackdropMode.BlurredWallpaper -> {
             val context = LocalContext.current
             var bmp by remember { mutableStateOf<Bitmap?>(null) }
+
             LaunchedEffect(Unit) {
-                bmp =
-                    withContext(Dispatchers.IO) @androidx.annotation.RequiresPermission(anyOf = ["android.permission.READ_WALLPAPER_INTERNAL", android.Manifest.permission.MANAGE_EXTERNAL_STORAGE]) {
-                    WallpaperManager.getInstance(context).drawable?.toBitmap(1080, 1920)
+                bmp = withContext(Dispatchers.IO) {
+                    runCatching {
+                        // No runtime permission required to read the current wallpaper drawable.
+                        WallpaperManager.getInstance(context)
+                            .drawable
+                            ?.toBitmap() // let it pick intrinsic size, we’ll blur anyway
+                    }.getOrNull()
                 }
             }
+
             Box(modifier.fillMaxSize()) {
-                bmp?.let {
+                if (bmp != null) {
                     Image(
-                        bitmap = it.asImageBitmap(), contentDescription = null,
+                        bitmap = bmp!!.asImageBitmap(),
+                        contentDescription = null,
                         modifier = Modifier
                             .fillMaxSize()
                             .blur(50.dp)
                     )
+                } else {
+                    // Fallback if wallpaper is unavailable: brand‑tinted background
+                    Box(
+                        Modifier
+                            .fillMaxSize()
+                            .background(
+                                Brush.linearGradient(
+                                    listOf(
+                                        BrandPrimary.copy(alpha = 0.9f),
+                                        BrandSecondary.copy(alpha = 0.5f)
+                                    )
+                                )
+                            )
+                    )
                 }
+
+                // Readability overlay (top/bottom fade)
+                val top = if (isSystemInDarkTheme()) Color.Black.copy(0.35f) else Color.Black.copy(0.18f)
+                val mid = Color.Transparent
+                val bottom = if (isSystemInDarkTheme()) Color.Black.copy(0.45f) else Color.Black.copy(0.25f)
+
                 Box(
                     Modifier
                         .fillMaxSize()
-                        .background(
-                            Brush.verticalGradient(
-                                listOf(
-                                    Color.Black.copy(0.25f),
-                                    Color.Transparent,
-                                    Color.Black.copy(0.35f)
-                                )
-                            )
-                        )
+                        .background(Brush.verticalGradient(listOf(top, mid, bottom)))
                 )
-                Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { content() }
+
+                Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    content()
+                }
             }
         }
     }

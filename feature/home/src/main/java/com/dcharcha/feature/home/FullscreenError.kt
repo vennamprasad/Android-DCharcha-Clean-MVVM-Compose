@@ -11,14 +11,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import com.dcharcha.core.ui.theme.dimens
 
 @Composable
 fun FullscreenError(message: String, onRetry: () -> Unit) {
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(message, color = MaterialTheme.colorScheme.error)
-            Spacer(Modifier.height(8.dp))
+            Spacer(Modifier.height(MaterialTheme.dimens.space8))
             Button(onClick = onRetry) { Text("Retry") }
         }
     }

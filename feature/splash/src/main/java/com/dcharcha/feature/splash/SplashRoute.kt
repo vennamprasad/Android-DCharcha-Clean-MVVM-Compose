@@ -11,16 +11,13 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.dcharcha.core.ui.DynamicBackdrop
 
 @Composable
 fun SplashRoute(onFinished: () -> Unit) {
-    DynamicBackdrop {
-        val comp by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.lottie_intro))
-        val progress by animateLottieCompositionAsState(comp, iterations = 1)
-        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            LottieAnimation(comp, progress = { progress }, modifier = Modifier.fillMaxSize(0.4f))
-        }
-        LaunchedEffect(progress) { if (progress >= 1f) onFinished() }
+    val comp by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.splash))
+    val progress by animateLottieCompositionAsState(comp, iterations = 1)
+    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        LottieAnimation(comp, progress = { progress }, modifier = Modifier.fillMaxSize(0.4f))
     }
+    LaunchedEffect(progress) { if (progress >= 1f) onFinished() }
 }

@@ -41,40 +41,38 @@ fun ProfileSetupRoute(
     var address by remember { mutableStateOf("") }
     var photo by remember { mutableStateOf<String?>(null) }
 
-    DynamicBackdrop {
-        Scaffold(topBar = { TopAppBar(title = { Text("Profile setup") }) }) { padding ->
-            Column(Modifier
-                .padding(padding)
-                .padding(16.dp)) {
-                OutlinedTextField(
-                    first,
-                    { first = it },
-                    label = { Text("First name") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-                OutlinedTextField(
-                    last,
-                    { last = it },
-                    label = { Text("Last name") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-                OutlinedTextField(
-                    email,
-                    { email = it },
-                    label = { Text("Email") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-                OutlinedTextField(
-                    address,
-                    { address = it },
-                    label = { Text("Address") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-                Spacer(Modifier.height(16.dp))
-                Button(onClick = {
-                    vm.save(UserProfile(uid, first, last, email, address, photo)); onDone()
-                }) { Text("Save & Continue") }
-            }
+    Scaffold(topBar = { TopAppBar(title = { Text("Profile setup") }) }) { padding ->
+        Column(Modifier
+            .padding(padding)
+            .padding(16.dp)) {
+            OutlinedTextField(
+                first,
+                { first = it },
+                label = { Text("First name") },
+                modifier = Modifier.fillMaxWidth()
+            )
+            OutlinedTextField(
+                last,
+                { last = it },
+                label = { Text("Last name") },
+                modifier = Modifier.fillMaxWidth()
+            )
+            OutlinedTextField(
+                email,
+                { email = it },
+                label = { Text("Email") },
+                modifier = Modifier.fillMaxWidth()
+            )
+            OutlinedTextField(
+                address,
+                { address = it },
+                label = { Text("Address") },
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(Modifier.height(16.dp))
+            Button(onClick = {
+                vm.save(UserProfile(uid, first, last, email, address, photo)); onDone()
+            }) { Text("Save & Continue") }
         }
     }
 }

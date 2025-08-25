@@ -16,26 +16,23 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.dcharcha.core.ui.DynamicBackdrop
 
 @Composable
 fun OtpRoute(phone: String, onVerified: () -> Unit) {
     var code by remember { mutableStateOf("") }
-    DynamicBackdrop {
-        Column(
-            Modifier
-                .fillMaxSize()
-                .padding(16.dp)
-        ) {
-            Text("OTP sent to $phone")
-            OutlinedTextField(
-                code,
-                { code = it },
-                label = { Text("Enter 6-digit code") },
-                modifier = Modifier.fillMaxWidth()
-            )
-            Spacer(Modifier.height(12.dp))
-            Button(onClick = onVerified, enabled = code.length == 6) { Text("Verify") }
-        }
+    Column(
+        Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text("OTP sent to $phone")
+        OutlinedTextField(
+            code,
+            { code = it },
+            label = { Text("Enter 6-digit code") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(Modifier.height(12.dp))
+        Button(onClick = onVerified, enabled = code.length == 6) { Text("Verify") }
     }
 }

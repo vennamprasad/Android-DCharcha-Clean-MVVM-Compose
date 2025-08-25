@@ -5,6 +5,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
@@ -15,22 +16,25 @@ import androidx.compose.ui.platform.LocalContext
  */
 @Composable
 fun DCharchaTheme(
+    windowSizeClass: WindowSizeClass,
     useDarkTheme: Boolean = isSystemInDarkTheme(),
-    useDynamicColor: Boolean = false, // flip from DataStore setting if you like
+    useDynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
-    val context = LocalContext.current
-    val colorScheme =
+    val ctx = LocalContext.current
+    val colors =
         if (useDynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            if (useDarkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+            if (useDarkTheme) dynamicDarkColorScheme(ctx) else dynamicLightColorScheme(ctx)
         } else {
             if (useDarkTheme) DCharchaDarkColors else DCharchaLightColors
         }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = DCharchaTypography,
-        shapes = DCharchaShapes,
-        content = content
-    )
+    ProvideUiScales(windowSizeClass) {
+        MaterialTheme(
+            colorScheme = colors,
+            typography = DCharchaTypography,
+            shapes = DCharchaShapes,
+            content = content
+        )
+    }
 }

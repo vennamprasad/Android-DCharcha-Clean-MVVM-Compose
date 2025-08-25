@@ -26,6 +26,7 @@ dependencies {
     api(libs.compose.ui)
     api(libs.compose.material3)
     api(libs.material.icons.extended)
+    implementation(libs.material3.window.size.class1)
     api(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
     ksp(libs.hilt.compiler.ext)

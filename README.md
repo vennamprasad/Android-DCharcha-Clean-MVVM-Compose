@@ -1,5 +1,7 @@
 # DCharcha
 
+<img src="/project.svg" alt="DCharcha"/>
+
 🚀 **DCharcha** is a modern Android application scaffold built with **Kotlin, Jetpack Compose, and Clean Architecture**.  
 It is designed to be modular, scalable, and follow Android best practices while making it easy to plug in real APIs.  
 

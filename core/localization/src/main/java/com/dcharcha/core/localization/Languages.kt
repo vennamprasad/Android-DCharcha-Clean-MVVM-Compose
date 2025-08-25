@@ -1,6 +1,6 @@
 package com.dcharcha.core.localization
 
-data class LocaleOption(val tag: String, val label: String)
+data class LocaleOption(val tag: String, val label: String, val icon: String? = null)
 
 val popularLanguages = listOf(
     LocaleOption("en-IN", "English (India)"),

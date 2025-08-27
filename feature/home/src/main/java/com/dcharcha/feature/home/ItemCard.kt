@@ -34,7 +34,9 @@ fun ItemCard(item: Item, onClick: () -> Unit) {
             )
         },
         trailingContent = {
-            IconButton(onClick = onClick) {
+            IconButton(onClick = {
+                onClick()
+            }) {
                 Icon(Icons.Default.ChevronRight, contentDescription = "Open")
             }
         }

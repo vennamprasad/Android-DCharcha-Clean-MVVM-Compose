@@ -1,13 +1,18 @@
 package com.dcharcha.core.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
-import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.Composable
 
-val DCharchaShapes = Shapes(
-    extraSmall = RoundedCornerShape(8.dp),
-    small = RoundedCornerShape(12.dp),
-    medium = RoundedCornerShape(16.dp),
-    large = RoundedCornerShape(20.dp),
-    extraLarge = RoundedCornerShape(28.dp)
-)
+@Composable
+fun dCharchaShapes(): Shapes {
+    val dimens = MaterialTheme.dimens
+    return Shapes(
+        extraSmall = RoundedCornerShape(dimens.cornerXS),
+        small = RoundedCornerShape(dimens.cornerS),
+        medium = RoundedCornerShape(dimens.cornerM),
+        large = RoundedCornerShape(dimens.cornerL),
+        extraLarge = RoundedCornerShape(dimens.cornerXL)
+    )
+}

@@ -10,49 +10,46 @@ import com.dcharcha.core.navigation.FeatureNavGraph
 import com.dcharcha.feature.auth.AuthRoute
 import com.dcharcha.feature.auth.ForgotRoute
 import com.dcharcha.feature.auth.OtpRoute
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import dagger.multibindings.IntoSet
-import javax.inject.Singleton
 
-private object Routes {
-    const val Graph = "auth"
-    const val Root = "auth/root"
-    const val Otp = "auth/otp/{phone}"
-    const val Forgot = "auth/forgot"
-}
 
-private class AuthGraph : FeatureNavGraph {
-    override val route: String = Routes.Graph
+class AuthGraph : FeatureNavGraph {
+    override val route: String = Routes.GRAPH
+
     override fun NavGraphBuilder.build(navController: NavHostController) {
-        navigation(startDestination = Routes.Root, route = Routes.Graph) {
-            composable(Routes.Root) {
+        navigation(startDestination = Routes.ROOT, route = Routes.GRAPH) {
+            composable(Routes.ROOT) {
                 AuthRoute(
-                    onMobileOtp = { phone -> navController.navigate("auth/otp/$phone") },
-                    onEmailLogin = { navController.navigate("profile/setup") { popUpTo(0) } },
-                    onSignup = { /* TODO */ },
-                    onForgot = { navController.navigate(Routes.Forgot) }
+                    onMobileOtp = { phone ->
+                        navController.navigate("auth/otp/$phone")
+                    },
+                    onEmailLogin = {
+                        navController.navigate("profile/setup") { popUpTo(0) }
+                    },
+                    onSignup = {
+                        navController.navigate("profile/setup") { popUpTo(0) }
+                    },
+                    onForgot = {
+                        navController.navigate(Routes.FORGOT)
+                    }
                 )
             }
-            composable(Routes.Forgot) { ForgotRoute { navController.popBackStack() } }
+            composable(Routes.FORGOT) {
+                ForgotRoute {
+                    navController.popBackStack()
+                }
+            }
             composable(
-                Routes.Otp,
-                arguments = listOf(navArgument("phone") { type = NavType.StringType })
+                Routes.OTP, arguments = listOf(navArgument("phone") {
+                    type = NavType.StringType
+                })
             ) { backStack ->
                 val phone = backStack.arguments?.getString("phone").orEmpty()
-                OtpRoute(phone) { navController.navigate("profile/setup") { popUpTo(0) } }
+                OtpRoute(phone) {
+                    navController.navigate("profile/setup") {
+                        popUpTo(0)
+                    }
+                }
             }
         }
     }
-}
-
-@Module
-@InstallIn(SingletonComponent::class)
-object AuthNavBindings {
-    @Provides
-    @IntoSet
-    @Singleton
-    fun graph(): FeatureNavGraph = AuthGraph()
 }

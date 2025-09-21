@@ -1,6 +1,5 @@
 package com.dcharcha.core.network.di
 
-import com.dcharcha.core.network.retrofit.AuthApi
 import com.dcharcha.core.network.retrofit.ItemApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -38,11 +37,6 @@ object NetworkModule {
             .client(client)
             .build()
     }
-
-
-    @Provides
-    @Singleton
-    fun authApi(retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)
 
     @Provides
     @Singleton

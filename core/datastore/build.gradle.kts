@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.protobuf)
 }
 
 android {
@@ -19,8 +20,26 @@ android {
     }
 }
 
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:${libs.versions.protobuf.get()}"
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                create("java") {
+                    option("lite")
+                }
+                // DO NOT add kotlin here (that’s experimental / not supported)
+            }
+        }
+    }
+}
+
 dependencies {
     api(libs.datastore)
+    implementation(libs.protobuf.javalite)
+
     api(libs.coroutines.core)
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)

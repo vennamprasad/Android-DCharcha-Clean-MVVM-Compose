@@ -26,7 +26,7 @@ fun HomeScreen(
     items: LazyPagingItems<Item>,
     onRetry: () -> Unit,
     onRefresh: () -> Unit,
-    onItemClick: (Item) -> Unit
+    onItemClick: (Item) -> Unit,
 ) {
     val listState = rememberSaveable(saver = LazyListState.Saver) {
         LazyListState(firstVisibleItemIndex = 0, firstVisibleItemScrollOffset = 0)

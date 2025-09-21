@@ -31,9 +31,11 @@ android {
 dependencies {
     api(platform(libs.compose.bom))
     api(libs.compose.ui)
+    api(libs.compose.ui.tooling.preview)
+    api(libs.compose.tooling)
     api(libs.compose.material3)
     api(libs.material.icons.extended)
-    implementation(libs.material3.window.size.class1)
+    implementation(libs.material3.window.size)
     api(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
     ksp(libs.hilt.compiler.ext)

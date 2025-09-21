@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.dcharcha.core";
+
+message UserPreferences {
+  string languageTag = 1; // e.g. "en-IN"
+  bool darkTheme = 2; // true = dark, false = light
+  string userId = 3; // optional persisted user id
+  string accessToken = 4;
+  string refreshToken = 5;
+  bool isLoggedIn = 6;
+  bool isWelcomeMessageShown = 7;
+}

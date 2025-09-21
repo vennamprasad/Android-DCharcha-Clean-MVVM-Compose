@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
             val windowSizeClass = calculateWindowSizeClass(this)
             DCharchaTheme(
                 windowSizeClass = windowSizeClass,
-                useDynamicColor = false
+                useDynamicColor = true
             ) {
                 DCharchaApp()
             }

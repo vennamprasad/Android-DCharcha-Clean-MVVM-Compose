@@ -24,4 +24,5 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
     ksp(libs.hilt.compiler.ext)
+    implementation(libs.moshi.kotlin)
 }

@@ -21,9 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dcharcha.core.database.entity.UserProfile
 import com.dcharcha.core.database.dao.UserProfileDao
-import com.dcharcha.core.ui.DynamicBackdrop
+import com.dcharcha.core.database.entity.UserProfile
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -44,7 +43,7 @@ fun ProfileSetupRoute(
     Scaffold(topBar = { TopAppBar(title = { Text("Profile setup") }) }) { padding ->
         Column(Modifier
             .padding(padding)
-            .padding(16.dp)) {
+        ) {
             OutlinedTextField(
                 first,
                 { first = it },

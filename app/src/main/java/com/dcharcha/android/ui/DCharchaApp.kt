@@ -16,7 +16,7 @@ import com.dcharcha.android.ui.nav.AppNavViewModel
 
 @Composable
 fun DCharchaApp() {
-    Scaffold(contentWindowInsets = WindowInsets(0)) { innerPadding ->
+    Scaffold { innerPadding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()

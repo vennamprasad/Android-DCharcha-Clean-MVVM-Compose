@@ -44,7 +44,7 @@ fun LanguageRoute(onContinue: () -> Unit) {
                 title = {
                     Text(
                         text = stringResource(R.string.select_language),
-                        style = MaterialTheme.typography.bodyLarge
+                        style = MaterialTheme.typography.titleMedium
                     )
                 },
                 // TopAppBar sits under status bar correctly when using window insets in root

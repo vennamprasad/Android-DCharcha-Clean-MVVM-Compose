@@ -1,4 +1,4 @@
-# Android-DCharcha-Clean-MVVM-Compos
+# Android-DCharcha-Clean-MVVM-Compose
 
 <img src="/project.svg" alt="DCharcha"/>
 
